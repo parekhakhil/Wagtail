@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load wagtailcore_tags wagtailimages_tags %}
+{% block content %}
+{% image self.image fill-600x200 as img %}
+<div class="jumbotron" style="background-image:url('{{img.url}}');background-size: cover;">
+    <h1 class="display-4">{{self.subtitle}}</h1>
+    <div class="lead">{{self.content|richtext}}</div>
+</div>
+
+{% endblock %}
