@@ -1,6 +1,7 @@
 '''Streamfield live in here'''
+from re import template
 from wagtail.core import blocks
-
+from wagtail.images.blocks import ImageChooserBlock
 class TitleAndTextBlock(blocks.StructBlock):
     title = blocks.CharBlock(required=True,help_text="Add your title")
     text = blocks.TextBlock(required=True,help_text="Add additional text")
@@ -16,4 +17,24 @@ class RichTextBlock(blocks.RichTextBlock):
         template = 'streams/richtext_block.html'
         icon = 'edit'
         label = 'Full Richtext'
-        
+
+
+class CardBlock(blocks.StructBlock):
+    """Cards with image and text as well as button"""
+    title = blocks.TextBlock(required=True,help_text='Insert card title')
+    cards = blocks.ListBlock(
+        blocks.StructBlock(
+            [
+                ('image',ImageChooserBlock(required=True)),
+                ('title',blocks.CharBlock(required=True,max_length=40)),
+                ('description',blocks.CharBlock(required=True,max_length=150)),
+                ('button_page',blocks.PageChooserBlock(required=False)),
+                ('button_url',blocks.URLBlock(required=False,help_text='Add the link you wants to redirect on click'))
+            ]
+        )
+    )
+
+    class Meta:
+        template = 'streams/cards_block.html'
+        icon='edit'
+        label = 'Add Card'
