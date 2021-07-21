@@ -16,7 +16,7 @@ class FlexPage(Page):
     body = StreamField(
         [
             ("title_and_text",blocks.TitleAndTextBlock())
-        ],null=True,
+        ],null=True,blank=True
     )
 
     subtitle = models.CharField(max_length=100,blank=True,null=True)

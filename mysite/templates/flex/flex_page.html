@@ -6,5 +6,9 @@
     <h1 class="display-4">{{self.subtitle}}</h1>
     <div class="lead">{{self.content|richtext}}</div>
 </div>
-
+<div class="container">
+    {% for block in page.body %}
+        {% include_block block %}
+    {% endfor %}
+</div>
 {% endblock %}

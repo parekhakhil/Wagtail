@@ -6,6 +6,7 @@ class TitleAndTextBlock(blocks.StructBlock):
     text = blocks.TextBlock(required=True,help_text="Add additional text")
 
     class Meta:
-        template = 'streams.title_and_text_block.html'
+        template = 'streams/title_and_text_block.html'
         icon = 'edit'
         label = "Title & Text"
+
