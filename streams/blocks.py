@@ -1,4 +1,5 @@
 '''Streamfield live in here'''
+from pyexpat import features
 from re import template
 from wagtail.core import blocks
 from wagtail.images.blocks import ImageChooserBlock
@@ -29,7 +30,9 @@ class CardBlock(blocks.StructBlock):
                 ('title',blocks.CharBlock(required=True,max_length=40)),
                 ('description',blocks.CharBlock(required=True,max_length=150)),
                 ('button_page',blocks.PageChooserBlock(required=False)),
-                ('button_url',blocks.URLBlock(required=False,help_text='Add the link you wants to redirect on click'))
+                ('button_url',blocks.URLBlock(required=False,help_text='Add the link you wants to redirect on click')),
+                ('button_text',blocks.CharBlock(
+                    required=True, default='Learn more', max_length=40)),
             ]
         )
     )
@@ -38,3 +41,17 @@ class CardBlock(blocks.StructBlock):
         template = 'streams/cards_block.html'
         icon='edit'
         label = 'Add Card'
+
+
+class CTABlock(blocks.StructBlock):
+    """A simple call to action section"""
+    title = blocks.CharBlock(required=True,max_length=50)
+    text = blocks.RichTextBlock(required=True,features=['bold','italic','link'])
+    button_page = blocks.PageChooserBlock(required=False)
+    button_url = blocks.URLBlock(required=True)
+    button_text =blocks.CharBlock(required=True,default='Learn more',max_length=40)
+
+    class Meta:
+        template = 'streams/cta_block.html'
+        icon='placeholder'
+        label = "Call To Action"

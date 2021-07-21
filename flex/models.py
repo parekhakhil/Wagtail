@@ -19,6 +19,7 @@ class FlexPage(Page):
             ("title_and_text", blocks.TitleAndTextBlock()),
             ("richtext", blocks.RichTextBlock()),
             ("cards", blocks.CardBlock()),
+            ('cta',blocks.CTABlock())
         ], null=True, blank=True
     )
 
